@@ -48,14 +48,15 @@ if "port_number" in config.keys():
 else:
     port_number = "8000"
 
-output = "output"
+output = "templates/"
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="templates/")
 
 if model_name == "custom":
     model = torch.hub.load('ultralytics/yolov5', model_name, path = weight_path)
 else:
     model = torch.hub.load('ultralytics/yolov5', model_name)
+
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     return render_template('index.html')
@@ -74,8 +75,9 @@ def detect_licence_plate_from_image():
             return jsonify(response)
         
         else:
-            result.save(save_dir = "output/")
-            return render_template("response.html", image_path = f"{output}/image0.jpg")
+            
+            return render_template("response.html", image_path = f"../{output}image0.jpg")
+
 @app.route(f'/{project_name}/pixel', methods = ['GET', 'POST'])
 def detect_licence_plate_from_pixel():
     if request.method == 'POST':
@@ -92,13 +94,18 @@ def generate_response(result):
     response = {}
     bboxes = result.pandas().xyxy[0]
     bboxes = bboxes[bboxes["confidence"] >= 0.5]
-    for img in result.imgs:
-        buffered = BytesIO()
+    result.save(save_dir = f"{output}")
+
+    with open(f"{output}image0.jpg", "rb") as image_file:
+        b64 = base64.b64encode(image_file.read()).decode('utf-8')
+
+    # for img in result.imgs:
+    #     buffered = BytesIO()
         
-        img_base64 = Image.fromarray(img)
-        # img_base64.save(f"{output}/output.png")
-        img_base64.save(buffered, format="JPEG")
-        b64 = base64.b64encode(buffered.getvalue()).decode('utf-8')  # base64 encoded image with results
+    #     img_base64 = Image.fromarray(img)
+    #     # img_base64.save(f"{output}/output.png")
+    #     img_base64.save(buffered, format="JPEG")
+    #     b64 = base64.b64encode(buffered.getvalue()).decode('utf-8')  # base64 encoded image with results
 
     for key in keys:
         # print(bboxes[key].reset_index(True))

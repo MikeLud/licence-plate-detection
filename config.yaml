@@ -3,4 +3,4 @@ weight_path: "licence-plate-detetion-training/weights/best.pt"
 model_name: custom
 host_name: 0.0.0.0
 port_number: 5000
-output_path: "output"
+output_path: "template/output"
