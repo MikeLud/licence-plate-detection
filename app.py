@@ -57,7 +57,7 @@ if model_name == "custom":
 else:
     model = torch.hub.load('ultralytics/yolov5', model_name)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route(f'/{project_name}', methods = ['GET', 'POST'])
 def home():
     return render_template('index.html')
 
