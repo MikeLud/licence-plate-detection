@@ -1,10 +1,22 @@
 # licence-plate-detection
 
-In recent years, licence plate detection or license plate recognition has been one of the useful approaches for vehicle surveillance.In this project, I will use use YOLOV5 model to detect number plate from a frame
+In recent years, licence plate detection has been one of the useful approaches for vehicle surveillance.In this project, I will use use YOLOV5 model to detect number plate from a frame
 
+## Functionality
+
+	1. Break video into frames, if not image
+	2. Detect car and number plate from frames using api based on yolov5
+		2.a Functionality of api:
+			2.a.1. Takes image as request
+			2.a.2. Make prediction to detect car and number plate 
+			2.a.3. Return base64 image and predicted bounding boxes as response
+	3. Display the results on UI
+		Link : 34.93.166.166:5000/licence-plate-detection/
+	
+		
 ## Its Application
 
-Traffic control and the identification of vehicle owners have become a major problem in all countries. Sometimes it becomes difficult to identify a vehicle owner who is breaking the rules of the road and driving too fast. Therefore, it is not possible to catch and punish such kind of people because the traffic personnel might not be able to retrieve the vehicle number of the moving vehicle due to the speed of the vehicle. So to solve these types of problems we need to create a Licence Plate Detection System
+Traffic control and the identification of vehicle owners have become a major problem in all countries. Sometimes it becomes difficult to identify a vehicle owner who is breaking the rules of the road and driving too fast. Therefore, it is not possible to catch and punish such kind of people because the traffic personnel might not be able to retrieve the vehicle number of the moving vehicle due to the speed of the vehicle. So to solve these types of problems we need to create a Licence Plate Detection System.
 
 ### Following are the steps to use this repository
 	
